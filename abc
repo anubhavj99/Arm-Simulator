@@ -1,0 +1,21 @@
+Fetch instruction 0xE59F5000 from address 0x0
+DECODE: Operation is LDR, Base register is R15, Offset is 0, Destination Register is R5
+EXECUTE: Put R15's 1 element in R5
+
+Fetch instruction 0xE3A0200A from address 0x4
+DECODE: Operation is MOV, First Operand is R0, immediate second Operand is 10, Destination Register is R2
+Read Registers: R0 = 0
+EXECUTE: MOV 10 in R2
+
+Fetch instruction 0xE3A03002 from address 0x8
+DECODE: Operation is MOV, First Operand is R0, immediate second Operand is 2, Destination Register is R3
+Read Registers: R0 = 0
+EXECUTE: MOV 2 in R3
+
+Fetch instruction 0xE0821003 from address 0xC
+DECODE: Operation is ADD, First Operand is R2, Second Operand is R3, Destination Register is R1
+Read Registers: R2 = 0, R3 = 0
+EXECUTE: ADD 0 and 0
+
+Fetch instruction 0xEF000011 from address 0x1F
+
