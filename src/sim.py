@@ -16,6 +16,12 @@ V = 0
 C = 0
 opcode = -1;
 fileData = [];
+link = 0;
+isPCinR14 = 0;
+PCsetdynamic = 0;
+# isPCset = 0;
+# numberLink = 0;
+# PCcache = [0 for i in range(512)];
 MEM = [0 for i in range(4096)];
 R = [0 for i in range(16)];
 	
@@ -28,6 +34,12 @@ def fetch():
 	global address;
 	global hexcommand;
 	global fileData;
+	global PCsetdynamic;
+	global isPCinR14;
+	if PCsetdynamic == 0 and isPCinR14 == 1:
+		R[15] = R[14];
+		isPCinR14 = 0;
+	PCsetdynamic = 0;	
 	for i in range(len(fileData)):
 		tmpVar = int(fileData[i][0], 16);
 		# print(R[15], int(fileData[i][0], 16))
@@ -49,7 +61,8 @@ def decode():
 	global opcode;
 	global groupCode;
 	global condition
-	global offset
+	global offset;
+	global link;
 	hexcommand = int(hexcommand, 16);
 	opcode = (hexcommand>>21) & (0xF);
 	#print("opcode", opcode);
@@ -126,20 +139,37 @@ def decode():
 	elif flag==2:
 		condition = (hexcommand>>28) & (0xF);
 		offset = (hexcommand) & (0xFFFFFF) ;
-		if condition == 0 :
-			print("DECODE: Operation is BEQ, offset is : ", hex(offset), sep="");
-		elif condition == 1 :
-			print("DECODE: Operation is BNE, offset is : ", hex(offset), sep="");
-		elif condition == 10 :
-			print("DECODE: Operation is BGE, offset is : ", hex(offset), sep="");
-		elif condition == 11 :
-			print("DECODE: Operation is BLT, offset is : ", hex(offset), sep="");		
-		elif condition == 12 :
-			print("DECODE: Operation is BGT, offset is : ", hex(offset), sep="");
-		elif condition == 13 :
-			print("DECODE: Operation is BLE, offset is : ", hex(offset), sep="");
-		elif condition == 14:
-			print("DECODE: Operation is BAL, offset is : ", hex(offset), sep="");	
+		link = (hexcommand>>24) & (0x1);
+		if link == 0:
+			if condition == 0 :
+				print("DECODE: Operation is BEQ, offset is : ", offset, sep="");
+			elif condition == 1 :
+				print("DECODE: Operation is BNE, offset is : ", offset, sep="");
+			elif condition == 10 :
+				print("DECODE: Operation is BGE, offset is : ", offset, sep="");
+			elif condition == 11 :
+				print("DECODE: Operation is BLT, offset is : ", offset, sep="");		
+			elif condition == 12 :
+				print("DECODE: Operation is BGT, offset is : ", offset, sep="");
+			elif condition == 13 :
+				print("DECODE: Operation is BLE, offset is : ", offset, sep="");
+			elif condition == 14:
+				print("DECODE: Operation is BAL, offset is : ", offset, sep="");
+		elif link == 1:
+			if condition == 0 :
+				print("DECODE: Operation is BLEQ, offset is : ", offset, sep="");
+			elif condition == 1 :
+				print("DECODE: Operation is BLNE, offset is : ", offset, sep="");
+			elif condition == 10 :
+				print("DECODE: Operation is BLGE, offset is : ", offset, sep="");
+			elif condition == 11 :
+				print("DECODE: Operation is BLLT, offset is : ", offset, sep="");		
+			elif condition == 12 :
+				print("DECODE: Operation is BLGT, offset is : ", offset, sep="");
+			elif condition == 13 :
+				print("DECODE: Operation is BLLE, offset is : ", offset, sep="");
+			elif condition == 14:
+				print("DECODE: Operation is BLAL, offset is : ", offset, sep="");	
 
 
 def twoComplementToInteger(x):
@@ -179,6 +209,9 @@ def execute() :
 	global V
 	global C
 	global offsetValue;
+	global link;
+	global isPCinR14;
+	global PCsetdynamic;
 
 	result = 0;
 	if flag == 0: 
@@ -313,6 +346,7 @@ def execute() :
 			operandOne = 1;
 
 		if operandOne == 1:
+			PCsetdynamic = 1;
 			tmp = ((offset) & (0x800000))<<1;
 			for i in range(8):
 				offset += tmp;
@@ -321,10 +355,13 @@ def execute() :
 			offset = twoComplementToInteger(offset);
 			offset = offset << 2;
 			# print(offset, R[15])
+			if link == 1 and isPCinR14 == 0:
+				R[14] = R[15];
+				isPCinR14 = 1;
 			R[15] += offset + 4;
 			print("EXECUTE: Updating PC to ", hex(R[15]), sep="");
 		else:
-			print("EXECUTE: No execution", hex(R[15]));
+			print("EXECUTE: No execution");
 
 
 def memory() :
@@ -345,6 +382,7 @@ def memory() :
 	global Z
 	global V
 	global C
+	global link;
 
 	if flag==1 :
 		if groupCode == 24 :
@@ -376,6 +414,7 @@ def writeBack():
 	global Z
 	global V
 	global C
+	global link;
 
 	if flag == 0 :
 		if opcode == 10 :
@@ -389,7 +428,7 @@ def writeBack():
 		elif groupCode == 25 :
 			print("WRITEBACK: Write ", result, " to R", destination, sep="")
 	elif flag == 2 :
-		print("WRITEBACK: No writeBack Operation", hex(R[15]))	
+		print("WRITEBACK: No writeBack Operation")	
 
 	elif flag == 3 : 
 		print("EXIT");
@@ -414,8 +453,11 @@ if __name__ == '__main__':
 		execute();
 		memory();
 		writeBack();
-		# print(R);
+		print(R);
 		# print(N,Z);
+		for i in range(len(MEM)):
+			if MEM[i] != 0:
+				print(MEM[i], i)
 		print();
 
 
