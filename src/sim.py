@@ -9,21 +9,21 @@ groupCode = 0;
 condition = 0;
 offset = 0;
 offsetValue = 0;
-result = 0
+result = 0;
+link = 0
+file = "";
 N = 0
 Z = 0
 V = 0
 C = 0
 opcode = -1;
 fileData = [];
-link = 0;
-isPCinR14 = 0;
-PCsetdynamic = 0;
-# isPCset = 0;
-# numberLink = 0;
-# PCcache = [0 for i in range(512)];
 MEM = [0 for i in range(4096)];
 R = [0 for i in range(16)];
+code = 0
+val = 0
+isPCinR14 = 0
+PCsetdynamic = 0
 	
 import struct
 def int32_to_uint32(i):
@@ -34,15 +34,16 @@ def fetch():
 	global address;
 	global hexcommand;
 	global fileData;
-	global PCsetdynamic;
-	global isPCinR14;
-	if PCsetdynamic == 0 and isPCinR14 == 1:
-		R[15] = R[14];
-		isPCinR14 = 0;
-	PCsetdynamic = 0;	
+	global isPCinR14
+	global PCsetdynamic
+
+	if PCsetdynamic == 0 and isPCinR14 == 1 :
+		R[15] = R[14]
+		isPCinR14 = 0
+	PCsetdynamic = 0	 
 	for i in range(len(fileData)):
 		tmpVar = int(fileData[i][0], 16);
-		# print(R[15], int(fileData[i][0], 16))
+		# print(R[15], int(fileData[i][0], 16), sep="")
 		if tmpVar == R[15]:
 			address, hexcommand = fileData[i];
 			break;
@@ -61,16 +62,21 @@ def decode():
 	global opcode;
 	global groupCode;
 	global condition
-	global offset;
-	global link;
+	global offset
+	global code
+	global val
+	global isPCinR14
+	global PCsetdynamic
+
+	# print(hexcommand, sep="")
 	hexcommand = int(hexcommand, 16);
 	opcode = (hexcommand>>21) & (0xF);
-	#print("opcode", opcode);
+	#print("opcode", opcode, sep="");
 	global flag;
 	flag = (hexcommand>>26) & (0x3);
 	# Shifting 26 bits and AND with 11 (3) to get 26th and 27th bit
-	#print(flag);
-		
+	# print("flag",flag, sep="");
+	# print(bin(hexcommand), sep="")
 
 	if flag == 0:
 		immediate = (hexcommand>>25) & (0x1);
@@ -128,6 +134,7 @@ def decode():
 
 			print("Read Registers: R", operandOne, " = ", R[operandOne], sep="");
 	elif flag == 1:
+		# print("hello", bin(hexcommand), sep="")
 		groupCode = (hexcommand>>20) & (0x3F);
 		operandOne = (hexcommand>>16) & (0xF);
 		operandTwo = (hexcommand) & (0xFFF);
@@ -135,12 +142,35 @@ def decode():
 		if groupCode == 25:
 			print("DECODE: Operation is LDR, Base register is R", operandOne,", Offset is ", operandTwo,", Destination Register is R", destination, sep="");
 		elif groupCode == 24:
-			print("DECODE: Operation is STR, Base register is R", operandOne,", Offset is ", operandTwo,", Register stored in memory is R", destination, " Read Register: R", destination, " = ", R[destination],sep="");
+			print("DECODE: Operation is STR, Base register is R", operandOne,", Offset is ", operandTwo, " Read Register: R", destination, " = ", R[destination], sep="");
+		elif groupCode == 27 :
+			print("DECODE: Operation is LDR with pre indexed update, Base register is R", operandOne,", Offset is ", operandTwo, " Destination Register is R", destination, sep="");	
+		elif groupCode == 26 :
+			print("DECODE: Operation is STR with pre indexed update, Base register is R", operandOne,", Offset is ", operandTwo, " Read Register: R", destination, " = ", R[destination], sep="");	
+		elif groupCode == 57 :
+			print("DECODE: Operation is LDR with Register Offset, Base Register is R", operandOne, ", Offset is value in R", (operandTwo) & (0xF), " : ", R[(operandTwo) & (0xF)], " Destination Register is R", destination, sep="")
+		elif groupCode == 56 :
+			print("DECODE: Operation is STR with Register Offset, Base Register is R", operandOne,", Offset is value in R", (operandTwo) & (0xF), " : ", R[(operandTwo) & (0xF)], " Read Register :R", destination, "=", R[destination], sep="")
+		elif groupCode == 59 :
+			print("DECODE: Operation is LDR with pre indexed update with Register Offset, Base Register is R", operandOne, ", Offset is value in R", (operandTwo) & (0xF), " : ", R[(operandTwo) & (0xF)], " Destination Register is R", destination, sep="")
+		elif groupCode == 58 :	
+			print("DECODE: Operation is STR with pre indexed update with Register Offset, Base Register is R", operandOne,", Offset is value in R", (operandTwo) & (0xF), " : ", R[(operandTwo) & (0xF)], " Read Register :R", destination, "=", R[destination], sep="")
+		elif groupCode == 11 : 
+			print("DECODE: Operation is LDR with post indexed update with Immediate, Base Register is R", operandOne, ", Offset is value in R", operandTwo, " : ", operandTwo, " Destination Register is R", destination, sep="")
+		elif groupCode == 10 :
+			print("DECODE: Operation is STR with post indexed update with Immediate, Base Register is R", operandOne,", Offset is value in R", operandTwo, " : ", operandTwo, " Read Register :R", destination, "=", R[destination], sep="")
+		elif groupCode == 43 :
+			print("DECODE: Operation is LDR with post indexed with Register Offset, Base Register is R", operandOne, ", Offset is value in R", (operandTwo) & (0xF), " : ", R[(operandTwo) & (0xF)], " Destination Register is R", destination, sep="")
+		elif groupCode == 42 :	
+			print("DECODE: Operation is STR with post indexed with Register Offset, Base Register is R", operandOne,", Offset is value in R", (operandTwo) & (0xF), " : ", R[(operandTwo) & (0xF)], " Read Register :R", destination, "=", R[destination], sep="")
+		
+
 	elif flag==2:
 		condition = (hexcommand>>28) & (0xF);
 		offset = (hexcommand) & (0xFFFFFF) ;
 		link = (hexcommand>>24) & (0x1);
-		if link == 0:
+
+		if link == 0 :
 			if condition == 0 :
 				print("DECODE: Operation is BEQ, offset is : ", offset, sep="");
 			elif condition == 1 :
@@ -155,7 +185,7 @@ def decode():
 				print("DECODE: Operation is BLE, offset is : ", offset, sep="");
 			elif condition == 14:
 				print("DECODE: Operation is BAL, offset is : ", offset, sep="");
-		elif link == 1:
+		elif link == 1 :
 			if condition == 0 :
 				print("DECODE: Operation is BLEQ, offset is : ", offset, sep="");
 			elif condition == 1 :
@@ -169,7 +199,19 @@ def decode():
 			elif condition == 13 :
 				print("DECODE: Operation is BLLE, offset is : ", offset, sep="");
 			elif condition == 14:
-				print("DECODE: Operation is BLAL, offset is : ", offset, sep="");	
+				print("DECODE: Operation is BLAL, offset is : ", offset, sep="");
+		
+
+	elif flag == 3 :
+		code = (hexcommand) & (0xF)
+		if code == 1 :
+			print("DECODE : Operation is Exit")
+		elif code == 11 :
+			print("DECODE : Operation is File Output")
+		elif code == 12 :
+			print("DECODE : Operation is Console Input")		
+
+
 
 
 def twoComplementToInteger(x):
@@ -185,7 +227,7 @@ def twoComplementToInteger(x):
 		elif a[i] == "0":
 			a = a[:i] + "1" + a[i+1:]
 	a = int(a,2)+1;
-	# print(a, negative, bin(x));
+	# print(a, negative, bin(x), sep="");
 	if negative:
 		a = a * -1;
 	return a;
@@ -209,9 +251,11 @@ def execute() :
 	global V
 	global C
 	global offsetValue;
-	global link;
-	global isPCinR14;
-	global PCsetdynamic;
+	global code
+	global val
+	global isPCinR14
+	global PCsetdynamic
+	global link
 
 	result = 0;
 	if flag == 0: 
@@ -232,21 +276,6 @@ def execute() :
 			elif opcode == 4 : 
 				result = R[operandOne] + R[operandTwo]	
 				print("EXECUTE: ADD ", R[operandOne], " and ", R[operandTwo], sep="")	
-			elif opcode == 5 : 
-				result = R[operandOne] + R[operandTwo] + carry	
-				print("EXECUTE: ADC ", R[operandOne], " and ", R[operandTwo], sep="")
-			elif opcode == 6 : 
-				result = R[operandOne] - R[operandTwo]	+ carry - 1
-				print("EXECUTE: SBC ", R[operandOne], " and ", R[operandTwo], sep="")
-			elif opcode == 7 : 
-				result = R[operandTwo] - R[operandOne]	+ carry - 1
-				print("EXECUTE: RSC ", R[operandOne], " and ", R[operandTwo], sep="")	
-			# elif opcode == 8 : 
-			# 	result = R[operandTwo] - R[operandOne]	+ carry - 1
-			# 	print("EXECUTE: TST ", R[operandOne], " and ", R[operandTwo], sep="")
-			# elif opcode == 9 : 
-			# 	result = R[operandTwo] - R[operandOne]	+ carry - 1
-			# 	print("EXECUTE: RSC ", R[operandOne], " and ", R[operandTwo], sep="")
 			elif opcode == 10 : 
 				print("EXECUTE: CMP ", R[operandOne], " and ", R[operandTwo], sep="")			
 				if R[operandOne] == R[operandTwo]: 
@@ -281,21 +310,6 @@ def execute() :
 			elif opcode == 4 : 
 				result = R[operandOne] + operandTwo	
 				print("EXECUTE: ADD ", R[operandOne], " and ", operandTwo, sep="")	
-			elif opcode == 5 : 
-				result = R[operandOne] + operandTwo + carry	
-				print("EXECUTE: ADC ", R[operandOne], " and ", operandTwo, sep="")
-			elif opcode == 6 : 
-				result = R[operandOne] - operandTwo	+ carry - 1
-				print("EXECUTE: SBC ", R[operandOne], " and ", operandTwo, sep="")
-			elif opcode == 7 : 
-				result = operandTwo - R[operandOne]	+ carry - 1
-				print("EXECUTE: RSC ", R[operandOne], " and ", operandTwo, sep="")	
-			# elif opcode == 8 : 
-			# 	result = operandTwo - R[operandOne]	+ carry - 1
-			# 	print("EXECUTE: TST ", R[operandOne], " and ", operandTwo, sep="")
-			# elif opcode == 9 : 
-			# 	result = operandTwo - R[operandOne]	+ carry - 1
-			# 	print("EXECUTE: RSC ", R[operandOne], " and ", operandTwo, sep="")
 			elif opcode == 10 : 
 				print("EXECUTE: CMP ", R[operandOne], " and ", operandTwo, sep="")			
 				if R[operandOne] == operandTwo: 
@@ -320,8 +334,31 @@ def execute() :
 				result = ~operandTwo
 				print("EXECUTE: MVN ", operandTwo, " in R", destination, sep="")
 	elif flag == 1:
-		offsetValue = int(operandTwo/4);
-		print("EXECUTE: Address calculated to be", hex(offsetValue));
+		if groupCode == 57 or groupCode == 56 or groupCode == 59 or groupCode == 58 or groupCode == 42 or groupCode == 43:
+			Register = (operandTwo) & (0xF); 
+			RegOrAmt = (operandTwo>>4) & (0x1);
+			ShiftType = (operandTwo>>5) & (0x3);
+			tmp = 0;
+			if RegOrAmt == 0:
+				tmp = (operandTwo>>7) & (0x1F);
+			elif RegOrAmt == 1:
+				tmp = R[(operandTwo>>8) & (0xF)];
+
+			if ShiftType == 0:
+					R[Register] = R[Register] << tmp;
+			elif ShiftType == 1:
+				R[Register] = R[Register] >> tmp;
+
+			offsetValue = int(R[Register]/4)
+			if groupCode == 42 or groupCode == 43 :
+				offsetValue = offsetValue * 4
+		
+		elif groupCode == 25 or groupCode == 24 or groupCode == 27 or groupCode == 26 or groupCode == 10 or groupCode == 11:
+			offsetValue = int(operandTwo/4);
+			if groupCode == 11 or groupCode == 10 :
+				offsetValue = offsetValue * 4
+
+		print("EXECUTE: Address calculated to be ", str(hex(offsetValue))[2:], sep="");
 	elif flag == 2:
 		operandOne = 0;
 		if condition == 0 :
@@ -346,23 +383,31 @@ def execute() :
 			operandOne = 1;
 
 		if operandOne == 1:
-			PCsetdynamic = 1;
+
+			PCsetdynamic = 1
 			tmp = ((offset) & (0x800000))<<1;
 			for i in range(8):
 				offset += tmp;
 				tmp = tmp << 1;
-			# print(offset, bin(offset))
+			# print(offset, bin(offset), sep="")
 			offset = twoComplementToInteger(offset);
 			offset = offset << 2;
-			# print(offset, R[15])
-			if link == 1 and isPCinR14 == 0:
-				R[14] = R[15];
-				isPCinR14 = 1;
+			# print(offset, R[15], sep="")
+			if link == 1 and isPCinR14 == 0 :
+				R[14] = R[15]
+				isPCinR14 = 1
 			R[15] += offset + 4;
 			print("EXECUTE: Updating PC to ", hex(R[15]), sep="");
 		else:
 			print("EXECUTE: No execution");
-
+	elif flag == 3 :
+		code = (hexcommand) & (0xF)
+		if code == 11 :
+			print("EXECUTE : The Value of register R1 is ", R[1], sep="")
+			file.write(str(R[1])+"\n");
+		elif code == 12 :
+			print("EXECUTE : Enter the Value to be put in R0 ", sep="")
+			val = int(input())	
 
 def memory() :
 	global address;
@@ -382,18 +427,36 @@ def memory() :
 	global Z
 	global V
 	global C
-	global link;
+	global isPCinR14
+	global PCsetdynamic
+	global link
 
 	if flag==1 :
-		if groupCode == 24 :
+		if groupCode == 24 or groupCode == 56:
 			BaseAddress = R[operandOne] + offsetValue;
 			MEM[BaseAddress] = R[destination]
-			print("MEMORY : Store in Memory", BaseAddress)
-		elif groupCode == 25 :
+			print("MEMORY : Store in Memory ", str(hex(BaseAddress))[2:], sep="")
+		elif groupCode == 25 or groupCode == 57:
 			BaseAddress = R[operandOne] + offsetValue
-			Value = MEM[BaseAddress]
-			result = Value
-			# print("MEMORY : Load from Memory", BaseAddress)
+			result = MEM[BaseAddress]
+			print("MEMORY : Load from Memory ", str(hex(BaseAddress))[2:], sep="")
+		elif groupCode == 27 or groupCode == 59:
+			BaseAddress = R[operandOne] + offsetValue
+			result = BaseAddress;
+			print("MEMORY : Load from Memory ", str(hex(BaseAddress))[2:], sep="")
+		elif groupCode == 26 or groupCode == 58:
+			BaseAddress = R[operandOne] + offsetValue;
+			MEM[BaseAddress] = destination;
+			print("MEMORY : Store in Memory ", str(hex(BaseAddress))[2:], sep="")
+		elif groupCode == 11 or groupCode == 43 :
+			BaseAddress = R[operandOne]
+			result = MEM[BaseAddress] + offsetValue
+			print("MEMORY : Load from Memory ", str(hex(BaseAddress))[2:], sep="")
+		elif groupCode == 10 or groupCode == 42 :	
+			BaseAddress = R[operandOne]
+			MEM[BaseAddress] = R[destination] + offsetValue;
+			print("MEMORY : Store in Memory ", str(hex(BaseAddress))[2:], sep="")
+
 	elif flag == 0 or flag == 2 :
 		print("MEMORY : No memory operation")		
 
@@ -414,7 +477,10 @@ def writeBack():
 	global Z
 	global V
 	global C
-	global link;
+	global code
+	global val
+	global isPCinR14
+	global PCsetdynamic
 
 	if flag == 0 :
 		if opcode == 10 :
@@ -423,17 +489,22 @@ def writeBack():
 			R[destination] = result
 			print("WRITEBACK: Write ", result, " to R", destination, sep="")
 	elif flag == 1 :
-		if groupCode == 24 :
+		if groupCode == 24 or groupCode == 56 or groupCode == 26 or groupCode == 58:
 			print("WRITEBACK: No writeBack Operation")
-		elif groupCode == 25 :
+		elif groupCode == 25 or groupCode == 57 or groupCode == 27 or groupCode == 59:
 			print("WRITEBACK: Write ", result, " to R", destination, sep="")
+			R[destination] = result
 	elif flag == 2 :
 		print("WRITEBACK: No writeBack Operation")	
 
 	elif flag == 3 : 
-		print("EXIT");
-		import sys
-		sys.exit();					
+
+		if code == 1 :
+			print("EXIT");
+			import sys
+			sys.exit();
+		elif code == 12 :
+			R[0] = val					
 
 
 
@@ -441,6 +512,7 @@ if __name__ == '__main__':
 	file = open("input/input.mem", "r");
 	fileData = file.readlines();
 	file.close();
+	file = open("output/Out.put", "w")
 	for i in range(len(fileData)):
 		fileData[i] = fileData[i].replace("\n", "");
 		fileData[i] = fileData[i].replace("0x", "");
@@ -453,12 +525,13 @@ if __name__ == '__main__':
 		execute();
 		memory();
 		writeBack();
-		print(R);
-		# print(N,Z);
-		for i in range(len(MEM)):
-			if MEM[i] != 0:
-				print(MEM[i], i)
-		print();
+		# print(R, sep="");
+		# for i in range(len(MEM)):
+		# 	if MEM[i] != 0:
+		# 		print(MEM[i], i)
+		# print(N,Z, sep="");
+		print()
+	file.close();
 
 
 
