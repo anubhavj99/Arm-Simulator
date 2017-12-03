@@ -1,476 +1,337 @@
-[['0', 'E3A0500A'], ['4', 'E3A04001'], ['8', 'E3A06000'], ['C', 'E3A07001'], ['10', 'E3A08000'], ['14', 'E1540005'], ['18', 'AA000004'], ['1C', 'E0876008'], ['20', 'E1A08007'], ['24', 'E1A07006'], ['28', 'E2844001'], ['2C', 'BAFFFFF8'], ['30', 'EF000011']] 
-
-Fetch instruction 0xE3A0500A from address 0x0
-DECODE: Operation is MOV, First Operand is R0, immediate second Operand is 10, Destination Register is R5
+Fetch instruction 0xE3A00000 from address 0x0
+DECODE: Operation is MOV, First Operand is R0, immediate second Operand is 0, Destination Register is R0
 Read Registers: R0 = 0
-EXECUTE: MOV 10 in R5
+EXECUTE: MOV 0 in R0
 MEMORY : No memory operation
-WRITEBACK: Write 10 to R5
+WRITEBACK: Write 0 to R0
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4]
 
-Fetch instruction 0xE3A04001 from address 0x4
-DECODE: Operation is MOV, First Operand is R0, immediate second Operand is 1, Destination Register is R4
-Read Registers: R0 = 0
-EXECUTE: MOV 1 in R4
+Fetch instruction 0xEF00006C from address 0x4
+DECODE : Operation is Console Input
+EXECUTE : Enter the Value to be put in R0 
+[5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8]
+
+Fetch instruction 0xE1A03000 from address 0x8
+DECODE: Operation is MOV, First Operand is R0, Second Operand is R0, Destination Register is R3
+Read Registers: R0 = 5, R0 = 5
+EXECUTE: MOV 5 in R3
 MEMORY : No memory operation
-WRITEBACK: Write 1 to R4
+WRITEBACK: Write 5 to R3
+[5, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12]
 
-Fetch instruction 0xE3A06000 from address 0x8
-DECODE: Operation is MOV, First Operand is R0, immediate second Operand is 0, Destination Register is R6
-Read Registers: R0 = 0
-EXECUTE: MOV 0 in R6
+Fetch instruction 0xE3A01000 from address 0xC
+DECODE: Operation is MOV, First Operand is R0, immediate second Operand is 0, Destination Register is R1
+Read Registers: R0 = 5
+EXECUTE: MOV 0 in R1
 MEMORY : No memory operation
-WRITEBACK: Write 0 to R6
+WRITEBACK: Write 0 to R1
+[5, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16]
 
-Fetch instruction 0xE3A07001 from address 0xC
-DECODE: Operation is MOV, First Operand is R0, immediate second Operand is 1, Destination Register is R7
-Read Registers: R0 = 0
-EXECUTE: MOV 1 in R7
+Fetch instruction 0xE3A02000 from address 0x10
+DECODE: Operation is MOV, First Operand is R0, immediate second Operand is 0, Destination Register is R2
+Read Registers: R0 = 5
+EXECUTE: MOV 0 in R2
 MEMORY : No memory operation
-WRITEBACK: Write 1 to R7
+WRITEBACK: Write 0 to R2
+[5, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20]
 
-Fetch instruction 0xE3A08000 from address 0x10
-DECODE: Operation is MOV, First Operand is R0, immediate second Operand is 0, Destination Register is R8
-Read Registers: R0 = 0
-EXECUTE: MOV 0 in R8
-MEMORY : No memory operation
-WRITEBACK: Write 0 to R8
-
-Fetch instruction 0xE1540005 from address 0x14
-DECODE: Operation is CMP, First Operand is R4, Second Operand is R5, Destination Register is R0
-Read Registers: R4 = 1, R5 = 10
-EXECUTE: CMP 1 and 10
+Fetch instruction 0xE1520003 from address 0x14
+DECODE: Operation is CMP, First Operand is R2, Second Operand is R3, Destination Register is R0
+Read Registers: R2 = 0, R3 = 5
+EXECUTE: CMP 0 and 5
 MEMORY : No memory operation
 WRITEBACK: No writeBack Operation
+[5, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24]
 
 Fetch instruction 0xAA000004 from address 0x18
 DECODE: Operation is BGE, offset is : 4
 EXECUTE: No execution
 MEMORY : No memory operation
 WRITEBACK: No writeBack Operation
+[5, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28]
 
-Fetch instruction 0xE0876008 from address 0x1C
-DECODE: Operation is ADD, First Operand is R7, Second Operand is R8, Destination Register is R6
-Read Registers: R7 = 1, R8 = 0
-EXECUTE: ADD 1 and 0
+Fetch instruction 0xE3A00000 from address 0x1C
+DECODE: Operation is MOV, First Operand is R0, immediate second Operand is 0, Destination Register is R0
+Read Registers: R0 = 5
+EXECUTE: MOV 0 in R0
 MEMORY : No memory operation
-WRITEBACK: Write 1 to R6
+WRITEBACK: Write 0 to R0
+[0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 32]
 
-Fetch instruction 0xE1A08007 from address 0x20
-DECODE: Operation is MOV, First Operand is R0, Second Operand is R7, Destination Register is R8
-Read Registers: R0 = 0, R7 = 1
-EXECUTE: MOV 1 in R8
+Fetch instruction 0xEF00006C from address 0x20
+DECODE : Operation is Console Input
+EXECUTE : Enter the Value to be put in R0 
+[1, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 36]
+
+Fetch instruction 0xE0811000 from address 0x24
+DECODE: Operation is ADD, First Operand is R1, Second Operand is R0, Destination Register is R1
+Read Registers: R1 = 0, R0 = 1
+EXECUTE: ADD 0 and 1
 MEMORY : No memory operation
-WRITEBACK: Write 1 to R8
+WRITEBACK: Write 1 to R1
+[1, 1, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40]
 
-Fetch instruction 0xE1A07006 from address 0x24
-DECODE: Operation is MOV, First Operand is R0, Second Operand is R6, Destination Register is R7
-Read Registers: R0 = 0, R6 = 1
-EXECUTE: MOV 1 in R7
+Fetch instruction 0xE2822001 from address 0x28
+DECODE: Operation is ADD, First Operand is R2, immediate second Operand is 1, Destination Register is R2
+Read Registers: R2 = 0
+EXECUTE: ADD 0 and 1
 MEMORY : No memory operation
-WRITEBACK: Write 1 to R7
+WRITEBACK: Write 1 to R2
+[1, 1, 1, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 44]
 
-Fetch instruction 0xE2844001 from address 0x28
-DECODE: Operation is ADD, First Operand is R4, immediate second Operand is 1, Destination Register is R4
-Read Registers: R4 = 1
-EXECUTE: ADD 1 and 1
-MEMORY : No memory operation
-WRITEBACK: Write 2 to R4
-
-Fetch instruction 0xBAFFFFF8 from address 0x2C
-DECODE: Operation is BLT, offset is : 16777208
+Fetch instruction 0xEAFFFFF8 from address 0x2C
+DECODE: Operation is BAL, offset is : 16777208
 EXECUTE: Updating PC to 0x14
 MEMORY : No memory operation
 WRITEBACK: No writeBack Operation
+[1, 1, 1, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20]
 
-Fetch instruction 0xE1540005 from address 0x14
-DECODE: Operation is CMP, First Operand is R4, Second Operand is R5, Destination Register is R0
-Read Registers: R4 = 2, R5 = 10
-EXECUTE: CMP 2 and 10
+Fetch instruction 0xE1520003 from address 0x14
+DECODE: Operation is CMP, First Operand is R2, Second Operand is R3, Destination Register is R0
+Read Registers: R2 = 1, R3 = 5
+EXECUTE: CMP 1 and 5
 MEMORY : No memory operation
 WRITEBACK: No writeBack Operation
+[1, 1, 1, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24]
 
 Fetch instruction 0xAA000004 from address 0x18
 DECODE: Operation is BGE, offset is : 4
 EXECUTE: No execution
 MEMORY : No memory operation
 WRITEBACK: No writeBack Operation
+[1, 1, 1, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28]
 
-Fetch instruction 0xE0876008 from address 0x1C
-DECODE: Operation is ADD, First Operand is R7, Second Operand is R8, Destination Register is R6
-Read Registers: R7 = 1, R8 = 1
+Fetch instruction 0xE3A00000 from address 0x1C
+DECODE: Operation is MOV, First Operand is R0, immediate second Operand is 0, Destination Register is R0
+Read Registers: R0 = 1
+EXECUTE: MOV 0 in R0
+MEMORY : No memory operation
+WRITEBACK: Write 0 to R0
+[0, 1, 1, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 32]
+
+Fetch instruction 0xEF00006C from address 0x20
+DECODE : Operation is Console Input
+EXECUTE : Enter the Value to be put in R0 
+[2, 1, 1, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 36]
+
+Fetch instruction 0xE0811000 from address 0x24
+DECODE: Operation is ADD, First Operand is R1, Second Operand is R0, Destination Register is R1
+Read Registers: R1 = 1, R0 = 2
+EXECUTE: ADD 1 and 2
+MEMORY : No memory operation
+WRITEBACK: Write 3 to R1
+[2, 3, 1, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40]
+
+Fetch instruction 0xE2822001 from address 0x28
+DECODE: Operation is ADD, First Operand is R2, immediate second Operand is 1, Destination Register is R2
+Read Registers: R2 = 1
 EXECUTE: ADD 1 and 1
 MEMORY : No memory operation
-WRITEBACK: Write 2 to R6
+WRITEBACK: Write 2 to R2
+[2, 3, 2, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 44]
 
-Fetch instruction 0xE1A08007 from address 0x20
-DECODE: Operation is MOV, First Operand is R0, Second Operand is R7, Destination Register is R8
-Read Registers: R0 = 0, R7 = 1
-EXECUTE: MOV 1 in R8
-MEMORY : No memory operation
-WRITEBACK: Write 1 to R8
-
-Fetch instruction 0xE1A07006 from address 0x24
-DECODE: Operation is MOV, First Operand is R0, Second Operand is R6, Destination Register is R7
-Read Registers: R0 = 0, R6 = 2
-EXECUTE: MOV 2 in R7
-MEMORY : No memory operation
-WRITEBACK: Write 2 to R7
-
-Fetch instruction 0xE2844001 from address 0x28
-DECODE: Operation is ADD, First Operand is R4, immediate second Operand is 1, Destination Register is R4
-Read Registers: R4 = 2
-EXECUTE: ADD 2 and 1
-MEMORY : No memory operation
-WRITEBACK: Write 3 to R4
-
-Fetch instruction 0xBAFFFFF8 from address 0x2C
-DECODE: Operation is BLT, offset is : 16777208
+Fetch instruction 0xEAFFFFF8 from address 0x2C
+DECODE: Operation is BAL, offset is : 16777208
 EXECUTE: Updating PC to 0x14
 MEMORY : No memory operation
 WRITEBACK: No writeBack Operation
+[2, 3, 2, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20]
 
-Fetch instruction 0xE1540005 from address 0x14
-DECODE: Operation is CMP, First Operand is R4, Second Operand is R5, Destination Register is R0
-Read Registers: R4 = 3, R5 = 10
-EXECUTE: CMP 3 and 10
+Fetch instruction 0xE1520003 from address 0x14
+DECODE: Operation is CMP, First Operand is R2, Second Operand is R3, Destination Register is R0
+Read Registers: R2 = 2, R3 = 5
+EXECUTE: CMP 2 and 5
 MEMORY : No memory operation
 WRITEBACK: No writeBack Operation
+[2, 3, 2, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24]
 
 Fetch instruction 0xAA000004 from address 0x18
 DECODE: Operation is BGE, offset is : 4
 EXECUTE: No execution
 MEMORY : No memory operation
 WRITEBACK: No writeBack Operation
+[2, 3, 2, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28]
 
-Fetch instruction 0xE0876008 from address 0x1C
-DECODE: Operation is ADD, First Operand is R7, Second Operand is R8, Destination Register is R6
-Read Registers: R7 = 2, R8 = 1
+Fetch instruction 0xE3A00000 from address 0x1C
+DECODE: Operation is MOV, First Operand is R0, immediate second Operand is 0, Destination Register is R0
+Read Registers: R0 = 2
+EXECUTE: MOV 0 in R0
+MEMORY : No memory operation
+WRITEBACK: Write 0 to R0
+[0, 3, 2, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 32]
+
+Fetch instruction 0xEF00006C from address 0x20
+DECODE : Operation is Console Input
+EXECUTE : Enter the Value to be put in R0 
+[3, 3, 2, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 36]
+
+Fetch instruction 0xE0811000 from address 0x24
+DECODE: Operation is ADD, First Operand is R1, Second Operand is R0, Destination Register is R1
+Read Registers: R1 = 3, R0 = 3
+EXECUTE: ADD 3 and 3
+MEMORY : No memory operation
+WRITEBACK: Write 6 to R1
+[3, 6, 2, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40]
+
+Fetch instruction 0xE2822001 from address 0x28
+DECODE: Operation is ADD, First Operand is R2, immediate second Operand is 1, Destination Register is R2
+Read Registers: R2 = 2
 EXECUTE: ADD 2 and 1
 MEMORY : No memory operation
-WRITEBACK: Write 3 to R6
+WRITEBACK: Write 3 to R2
+[3, 6, 3, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 44]
 
-Fetch instruction 0xE1A08007 from address 0x20
-DECODE: Operation is MOV, First Operand is R0, Second Operand is R7, Destination Register is R8
-Read Registers: R0 = 0, R7 = 2
-EXECUTE: MOV 2 in R8
+Fetch instruction 0xEAFFFFF8 from address 0x2C
+DECODE: Operation is BAL, offset is : 16777208
+EXECUTE: Updating PC to 0x14
 MEMORY : No memory operation
-WRITEBACK: Write 2 to R8
+WRITEBACK: No writeBack Operation
+[3, 6, 3, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20]
 
-Fetch instruction 0xE1A07006 from address 0x24
-DECODE: Operation is MOV, First Operand is R0, Second Operand is R6, Destination Register is R7
-Read Registers: R0 = 0, R6 = 3
-EXECUTE: MOV 3 in R7
+Fetch instruction 0xE1520003 from address 0x14
+DECODE: Operation is CMP, First Operand is R2, Second Operand is R3, Destination Register is R0
+Read Registers: R2 = 3, R3 = 5
+EXECUTE: CMP 3 and 5
 MEMORY : No memory operation
-WRITEBACK: Write 3 to R7
+WRITEBACK: No writeBack Operation
+[3, 6, 3, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24]
 
-Fetch instruction 0xE2844001 from address 0x28
-DECODE: Operation is ADD, First Operand is R4, immediate second Operand is 1, Destination Register is R4
-Read Registers: R4 = 3
+Fetch instruction 0xAA000004 from address 0x18
+DECODE: Operation is BGE, offset is : 4
+EXECUTE: No execution
+MEMORY : No memory operation
+WRITEBACK: No writeBack Operation
+[3, 6, 3, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28]
+
+Fetch instruction 0xE3A00000 from address 0x1C
+DECODE: Operation is MOV, First Operand is R0, immediate second Operand is 0, Destination Register is R0
+Read Registers: R0 = 3
+EXECUTE: MOV 0 in R0
+MEMORY : No memory operation
+WRITEBACK: Write 0 to R0
+[0, 6, 3, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 32]
+
+Fetch instruction 0xEF00006C from address 0x20
+DECODE : Operation is Console Input
+EXECUTE : Enter the Value to be put in R0 
+[4, 6, 3, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 36]
+
+Fetch instruction 0xE0811000 from address 0x24
+DECODE: Operation is ADD, First Operand is R1, Second Operand is R0, Destination Register is R1
+Read Registers: R1 = 6, R0 = 4
+EXECUTE: ADD 6 and 4
+MEMORY : No memory operation
+WRITEBACK: Write 10 to R1
+[4, 10, 3, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40]
+
+Fetch instruction 0xE2822001 from address 0x28
+DECODE: Operation is ADD, First Operand is R2, immediate second Operand is 1, Destination Register is R2
+Read Registers: R2 = 3
 EXECUTE: ADD 3 and 1
 MEMORY : No memory operation
-WRITEBACK: Write 4 to R4
+WRITEBACK: Write 4 to R2
+[4, 10, 4, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 44]
 
-Fetch instruction 0xBAFFFFF8 from address 0x2C
-DECODE: Operation is BLT, offset is : 16777208
+Fetch instruction 0xEAFFFFF8 from address 0x2C
+DECODE: Operation is BAL, offset is : 16777208
 EXECUTE: Updating PC to 0x14
 MEMORY : No memory operation
 WRITEBACK: No writeBack Operation
+[4, 10, 4, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20]
 
-Fetch instruction 0xE1540005 from address 0x14
-DECODE: Operation is CMP, First Operand is R4, Second Operand is R5, Destination Register is R0
-Read Registers: R4 = 4, R5 = 10
-EXECUTE: CMP 4 and 10
+Fetch instruction 0xE1520003 from address 0x14
+DECODE: Operation is CMP, First Operand is R2, Second Operand is R3, Destination Register is R0
+Read Registers: R2 = 4, R3 = 5
+EXECUTE: CMP 4 and 5
 MEMORY : No memory operation
 WRITEBACK: No writeBack Operation
+[4, 10, 4, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24]
 
 Fetch instruction 0xAA000004 from address 0x18
 DECODE: Operation is BGE, offset is : 4
 EXECUTE: No execution
 MEMORY : No memory operation
 WRITEBACK: No writeBack Operation
+[4, 10, 4, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28]
 
-Fetch instruction 0xE0876008 from address 0x1C
-DECODE: Operation is ADD, First Operand is R7, Second Operand is R8, Destination Register is R6
-Read Registers: R7 = 3, R8 = 2
-EXECUTE: ADD 3 and 2
+Fetch instruction 0xE3A00000 from address 0x1C
+DECODE: Operation is MOV, First Operand is R0, immediate second Operand is 0, Destination Register is R0
+Read Registers: R0 = 4
+EXECUTE: MOV 0 in R0
 MEMORY : No memory operation
-WRITEBACK: Write 5 to R6
+WRITEBACK: Write 0 to R0
+[0, 10, 4, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 32]
 
-Fetch instruction 0xE1A08007 from address 0x20
-DECODE: Operation is MOV, First Operand is R0, Second Operand is R7, Destination Register is R8
-Read Registers: R0 = 0, R7 = 3
-EXECUTE: MOV 3 in R8
+Fetch instruction 0xEF00006C from address 0x20
+DECODE : Operation is Console Input
+EXECUTE : Enter the Value to be put in R0 
+[5, 10, 4, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 36]
+
+Fetch instruction 0xE0811000 from address 0x24
+DECODE: Operation is ADD, First Operand is R1, Second Operand is R0, Destination Register is R1
+Read Registers: R1 = 10, R0 = 5
+EXECUTE: ADD 10 and 5
 MEMORY : No memory operation
-WRITEBACK: Write 3 to R8
+WRITEBACK: Write 15 to R1
+[5, 15, 4, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40]
 
-Fetch instruction 0xE1A07006 from address 0x24
-DECODE: Operation is MOV, First Operand is R0, Second Operand is R6, Destination Register is R7
-Read Registers: R0 = 0, R6 = 5
-EXECUTE: MOV 5 in R7
-MEMORY : No memory operation
-WRITEBACK: Write 5 to R7
-
-Fetch instruction 0xE2844001 from address 0x28
-DECODE: Operation is ADD, First Operand is R4, immediate second Operand is 1, Destination Register is R4
-Read Registers: R4 = 4
+Fetch instruction 0xE2822001 from address 0x28
+DECODE: Operation is ADD, First Operand is R2, immediate second Operand is 1, Destination Register is R2
+Read Registers: R2 = 4
 EXECUTE: ADD 4 and 1
 MEMORY : No memory operation
-WRITEBACK: Write 5 to R4
+WRITEBACK: Write 5 to R2
+[5, 15, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 44]
 
-Fetch instruction 0xBAFFFFF8 from address 0x2C
-DECODE: Operation is BLT, offset is : 16777208
+Fetch instruction 0xEAFFFFF8 from address 0x2C
+DECODE: Operation is BAL, offset is : 16777208
 EXECUTE: Updating PC to 0x14
 MEMORY : No memory operation
 WRITEBACK: No writeBack Operation
+[5, 15, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20]
 
-Fetch instruction 0xE1540005 from address 0x14
-DECODE: Operation is CMP, First Operand is R4, Second Operand is R5, Destination Register is R0
-Read Registers: R4 = 5, R5 = 10
-EXECUTE: CMP 5 and 10
+Fetch instruction 0xE1520003 from address 0x14
+DECODE: Operation is CMP, First Operand is R2, Second Operand is R3, Destination Register is R0
+Read Registers: R2 = 5, R3 = 5
+EXECUTE: CMP 5 and 5
 MEMORY : No memory operation
 WRITEBACK: No writeBack Operation
-
-Fetch instruction 0xAA000004 from address 0x18
-DECODE: Operation is BGE, offset is : 4
-EXECUTE: No execution
-MEMORY : No memory operation
-WRITEBACK: No writeBack Operation
-
-Fetch instruction 0xE0876008 from address 0x1C
-DECODE: Operation is ADD, First Operand is R7, Second Operand is R8, Destination Register is R6
-Read Registers: R7 = 5, R8 = 3
-EXECUTE: ADD 5 and 3
-MEMORY : No memory operation
-WRITEBACK: Write 8 to R6
-
-Fetch instruction 0xE1A08007 from address 0x20
-DECODE: Operation is MOV, First Operand is R0, Second Operand is R7, Destination Register is R8
-Read Registers: R0 = 0, R7 = 5
-EXECUTE: MOV 5 in R8
-MEMORY : No memory operation
-WRITEBACK: Write 5 to R8
-
-Fetch instruction 0xE1A07006 from address 0x24
-DECODE: Operation is MOV, First Operand is R0, Second Operand is R6, Destination Register is R7
-Read Registers: R0 = 0, R6 = 8
-EXECUTE: MOV 8 in R7
-MEMORY : No memory operation
-WRITEBACK: Write 8 to R7
-
-Fetch instruction 0xE2844001 from address 0x28
-DECODE: Operation is ADD, First Operand is R4, immediate second Operand is 1, Destination Register is R4
-Read Registers: R4 = 5
-EXECUTE: ADD 5 and 1
-MEMORY : No memory operation
-WRITEBACK: Write 6 to R4
-
-Fetch instruction 0xBAFFFFF8 from address 0x2C
-DECODE: Operation is BLT, offset is : 16777208
-EXECUTE: Updating PC to 0x14
-MEMORY : No memory operation
-WRITEBACK: No writeBack Operation
-
-Fetch instruction 0xE1540005 from address 0x14
-DECODE: Operation is CMP, First Operand is R4, Second Operand is R5, Destination Register is R0
-Read Registers: R4 = 6, R5 = 10
-EXECUTE: CMP 6 and 10
-MEMORY : No memory operation
-WRITEBACK: No writeBack Operation
-
-Fetch instruction 0xAA000004 from address 0x18
-DECODE: Operation is BGE, offset is : 4
-EXECUTE: No execution
-MEMORY : No memory operation
-WRITEBACK: No writeBack Operation
-
-Fetch instruction 0xE0876008 from address 0x1C
-DECODE: Operation is ADD, First Operand is R7, Second Operand is R8, Destination Register is R6
-Read Registers: R7 = 8, R8 = 5
-EXECUTE: ADD 8 and 5
-MEMORY : No memory operation
-WRITEBACK: Write 13 to R6
-
-Fetch instruction 0xE1A08007 from address 0x20
-DECODE: Operation is MOV, First Operand is R0, Second Operand is R7, Destination Register is R8
-Read Registers: R0 = 0, R7 = 8
-EXECUTE: MOV 8 in R8
-MEMORY : No memory operation
-WRITEBACK: Write 8 to R8
-
-Fetch instruction 0xE1A07006 from address 0x24
-DECODE: Operation is MOV, First Operand is R0, Second Operand is R6, Destination Register is R7
-Read Registers: R0 = 0, R6 = 13
-EXECUTE: MOV 13 in R7
-MEMORY : No memory operation
-WRITEBACK: Write 13 to R7
-
-Fetch instruction 0xE2844001 from address 0x28
-DECODE: Operation is ADD, First Operand is R4, immediate second Operand is 1, Destination Register is R4
-Read Registers: R4 = 6
-EXECUTE: ADD 6 and 1
-MEMORY : No memory operation
-WRITEBACK: Write 7 to R4
-
-Fetch instruction 0xBAFFFFF8 from address 0x2C
-DECODE: Operation is BLT, offset is : 16777208
-EXECUTE: Updating PC to 0x14
-MEMORY : No memory operation
-WRITEBACK: No writeBack Operation
-
-Fetch instruction 0xE1540005 from address 0x14
-DECODE: Operation is CMP, First Operand is R4, Second Operand is R5, Destination Register is R0
-Read Registers: R4 = 7, R5 = 10
-EXECUTE: CMP 7 and 10
-MEMORY : No memory operation
-WRITEBACK: No writeBack Operation
-
-Fetch instruction 0xAA000004 from address 0x18
-DECODE: Operation is BGE, offset is : 4
-EXECUTE: No execution
-MEMORY : No memory operation
-WRITEBACK: No writeBack Operation
-
-Fetch instruction 0xE0876008 from address 0x1C
-DECODE: Operation is ADD, First Operand is R7, Second Operand is R8, Destination Register is R6
-Read Registers: R7 = 13, R8 = 8
-EXECUTE: ADD 13 and 8
-MEMORY : No memory operation
-WRITEBACK: Write 21 to R6
-
-Fetch instruction 0xE1A08007 from address 0x20
-DECODE: Operation is MOV, First Operand is R0, Second Operand is R7, Destination Register is R8
-Read Registers: R0 = 0, R7 = 13
-EXECUTE: MOV 13 in R8
-MEMORY : No memory operation
-WRITEBACK: Write 13 to R8
-
-Fetch instruction 0xE1A07006 from address 0x24
-DECODE: Operation is MOV, First Operand is R0, Second Operand is R6, Destination Register is R7
-Read Registers: R0 = 0, R6 = 21
-EXECUTE: MOV 21 in R7
-MEMORY : No memory operation
-WRITEBACK: Write 21 to R7
-
-Fetch instruction 0xE2844001 from address 0x28
-DECODE: Operation is ADD, First Operand is R4, immediate second Operand is 1, Destination Register is R4
-Read Registers: R4 = 7
-EXECUTE: ADD 7 and 1
-MEMORY : No memory operation
-WRITEBACK: Write 8 to R4
-
-Fetch instruction 0xBAFFFFF8 from address 0x2C
-DECODE: Operation is BLT, offset is : 16777208
-EXECUTE: Updating PC to 0x14
-MEMORY : No memory operation
-WRITEBACK: No writeBack Operation
-
-Fetch instruction 0xE1540005 from address 0x14
-DECODE: Operation is CMP, First Operand is R4, Second Operand is R5, Destination Register is R0
-Read Registers: R4 = 8, R5 = 10
-EXECUTE: CMP 8 and 10
-MEMORY : No memory operation
-WRITEBACK: No writeBack Operation
-
-Fetch instruction 0xAA000004 from address 0x18
-DECODE: Operation is BGE, offset is : 4
-EXECUTE: No execution
-MEMORY : No memory operation
-WRITEBACK: No writeBack Operation
-
-Fetch instruction 0xE0876008 from address 0x1C
-DECODE: Operation is ADD, First Operand is R7, Second Operand is R8, Destination Register is R6
-Read Registers: R7 = 21, R8 = 13
-EXECUTE: ADD 21 and 13
-MEMORY : No memory operation
-WRITEBACK: Write 34 to R6
-
-Fetch instruction 0xE1A08007 from address 0x20
-DECODE: Operation is MOV, First Operand is R0, Second Operand is R7, Destination Register is R8
-Read Registers: R0 = 0, R7 = 21
-EXECUTE: MOV 21 in R8
-MEMORY : No memory operation
-WRITEBACK: Write 21 to R8
-
-Fetch instruction 0xE1A07006 from address 0x24
-DECODE: Operation is MOV, First Operand is R0, Second Operand is R6, Destination Register is R7
-Read Registers: R0 = 0, R6 = 34
-EXECUTE: MOV 34 in R7
-MEMORY : No memory operation
-WRITEBACK: Write 34 to R7
-
-Fetch instruction 0xE2844001 from address 0x28
-DECODE: Operation is ADD, First Operand is R4, immediate second Operand is 1, Destination Register is R4
-Read Registers: R4 = 8
-EXECUTE: ADD 8 and 1
-MEMORY : No memory operation
-WRITEBACK: Write 9 to R4
-
-Fetch instruction 0xBAFFFFF8 from address 0x2C
-DECODE: Operation is BLT, offset is : 16777208
-EXECUTE: Updating PC to 0x14
-MEMORY : No memory operation
-WRITEBACK: No writeBack Operation
-
-Fetch instruction 0xE1540005 from address 0x14
-DECODE: Operation is CMP, First Operand is R4, Second Operand is R5, Destination Register is R0
-Read Registers: R4 = 9, R5 = 10
-EXECUTE: CMP 9 and 10
-MEMORY : No memory operation
-WRITEBACK: No writeBack Operation
-
-Fetch instruction 0xAA000004 from address 0x18
-DECODE: Operation is BGE, offset is : 4
-EXECUTE: No execution
-MEMORY : No memory operation
-WRITEBACK: No writeBack Operation
-
-Fetch instruction 0xE0876008 from address 0x1C
-DECODE: Operation is ADD, First Operand is R7, Second Operand is R8, Destination Register is R6
-Read Registers: R7 = 34, R8 = 21
-EXECUTE: ADD 34 and 21
-MEMORY : No memory operation
-WRITEBACK: Write 55 to R6
-
-Fetch instruction 0xE1A08007 from address 0x20
-DECODE: Operation is MOV, First Operand is R0, Second Operand is R7, Destination Register is R8
-Read Registers: R0 = 0, R7 = 34
-EXECUTE: MOV 34 in R8
-MEMORY : No memory operation
-WRITEBACK: Write 34 to R8
-
-Fetch instruction 0xE1A07006 from address 0x24
-DECODE: Operation is MOV, First Operand is R0, Second Operand is R6, Destination Register is R7
-Read Registers: R0 = 0, R6 = 55
-EXECUTE: MOV 55 in R7
-MEMORY : No memory operation
-WRITEBACK: Write 55 to R7
-
-Fetch instruction 0xE2844001 from address 0x28
-DECODE: Operation is ADD, First Operand is R4, immediate second Operand is 1, Destination Register is R4
-Read Registers: R4 = 9
-EXECUTE: ADD 9 and 1
-MEMORY : No memory operation
-WRITEBACK: Write 10 to R4
-
-Fetch instruction 0xBAFFFFF8 from address 0x2C
-DECODE: Operation is BLT, offset is : 16777208
-EXECUTE: Updating PC to 0x14
-MEMORY : No memory operation
-WRITEBACK: No writeBack Operation
-
-Fetch instruction 0xE1540005 from address 0x14
-DECODE: Operation is CMP, First Operand is R4, Second Operand is R5, Destination Register is R0
-Read Registers: R4 = 10, R5 = 10
-EXECUTE: CMP 10 and 10
-MEMORY : No memory operation
-WRITEBACK: No writeBack Operation
+[5, 15, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24]
 
 Fetch instruction 0xAA000004 from address 0x18
 DECODE: Operation is BGE, offset is : 4
 EXECUTE: Updating PC to 0x30
 MEMORY : No memory operation
 WRITEBACK: No writeBack Operation
+[5, 15, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 48]
 
-Fetch instruction 0xEF000011 from address 0x30
+Fetch instruction 0xE3A00001 from address 0x30
+DECODE: Operation is MOV, First Operand is R0, immediate second Operand is 1, Destination Register is R0
+Read Registers: R0 = 5
+EXECUTE: MOV 1 in R0
+MEMORY : No memory operation
+WRITEBACK: Write 1 to R0
+[1, 15, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 52]
+
+Fetch instruction 0xEF00006B from address 0x34
+DECODE : Operation is File Output
+EXECUTE : The Value of register R1 is 15
+[1, 15, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 56]
+
+Fetch instruction 0xE585100C from address 0x38
+DECODE: Operation is STR, Base register is R5, Offset is 12 Read Register: R1 = 15
+EXECUTE: Address calculated to be 3
+MEMORY : Store in Memory 3
+WRITEBACK: No writeBack Operation
+[1, 15, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 60]
+
+Fetch instruction 0xE595100C from address 0x3C
+DECODE: Operation is LDR, Base register is R5, Offset is 12, Destination Register is R1
+EXECUTE: Address calculated to be 3
+MEMORY : Load from Memory 3
+WRITEBACK: Write 15 to R1
+[1, 15, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 64]
+
+Fetch instruction 0xEF000011 from address 0x40
 DECODE : Operation is Exit
 EXIT

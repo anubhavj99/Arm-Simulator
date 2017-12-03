@@ -24,10 +24,6 @@ code = 0
 val = 0
 isPCinR14 = 0
 PCsetdynamic = 0
-	
-import struct
-def int32_to_uint32(i):
-    return struct.unpack_from("I", struct.pack("i", i))[0]
 
 def fetch():
 	global R;
@@ -280,8 +276,13 @@ def execute() :
 				print("EXECUTE: CMP ", R[operandOne], " and ", R[operandTwo], sep="")			
 				if R[operandOne] == R[operandTwo]: 
 					Z = 1
+					N = 0
 				elif R[operandOne] < R[operandTwo] :
 					N = 1
+					Z = 0
+				elif R[operandOne] > R[operandTwo] :
+					N = 0
+					Z = 0
 			elif opcode == 12 : 
 				result = R[operandOne] | R[operandTwo]
 				print("EXECUTE: ORR ", R[operandOne], " and ", R[operandTwo], sep="")	
@@ -518,14 +519,14 @@ if __name__ == '__main__':
 		fileData[i] = fileData[i].replace("0x", "");
 		fileData[i] = fileData[i].split(" ");
 		fileData[i][0] = fileData[i][0];
-	print(fileData, "\n");
+	# print(fileData, "\n");
 	while True:
 		fetch();
 		decode();
 		execute();
 		memory();
 		writeBack();
-		# print(R, sep="");
+		print(R, sep="");
 		# for i in range(len(MEM)):
 		# 	if MEM[i] != 0:
 		# 		print(MEM[i], i)
